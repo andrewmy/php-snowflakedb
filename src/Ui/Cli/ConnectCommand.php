@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Ui\Cli;
 
+use App\Infrastructure\SnowflakeConnector;
 use PDO;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,12 +16,7 @@ final class ConnectCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $dbh = new PDO(
-            'snowflake:account=' . $_ENV['SNOWFLAKE_ACCOUNT'],
-            $_ENV['SNOWFLAKE_USER'],
-            $_ENV['SNOWFLAKE_PASSWORD'],
-        );
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dbh = (new SnowflakeConnector())->connect();
         $output->writeln('Connected');
 
         $sth = $dbh->query("select 1234");
