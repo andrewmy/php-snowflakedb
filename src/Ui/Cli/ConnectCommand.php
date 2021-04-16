@@ -20,7 +20,7 @@ final class ConnectCommand extends Command
         $output->writeln('Connected');
 
         $sth = $dbh->query("select 1234");
-        while ($row=$sth->fetch(PDO::FETCH_NUM)) {
+        while ($row = $sth->fetch(PDO::FETCH_NUM)) {
             $output->writeln("RESULT: {$row[0]}");
         }
         $dbh = null;

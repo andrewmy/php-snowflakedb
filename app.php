@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Ui\Cli\ConnectCommand;
+use App\Ui\Cli\TableCommand;
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidPathException;
 use Symfony\Component\Console\Application;
@@ -18,5 +19,6 @@ try {
 
 $app = new Application();
 $app->add(new ConnectCommand());
+$app->add(new TableCommand());
 
 $app->run();
